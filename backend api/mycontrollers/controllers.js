@@ -1,6 +1,7 @@
 const userModel = require('../model/User')
 const User = userModel
 const bcrypt = require('bcrypt')
+const gravatar = require('gravatar')
 const controllers = {
     testAPI (req, res) {
         res.json({ message: 'This is a test for my api'})
@@ -17,10 +18,12 @@ const controllers = {
                if (user) {
                    return res.json({ message: 'email already registered' })
                } else {
+                //    generate an avatar
+                   const avatar = gravatar.url(req.body.email, {s: '200', r: 'pg', d: 'mm'})
                    const newUser = new User({
                        name: req.body.name,
                        email: req.body.email,
-                    //    avatar,
+                       avatar,
                        password: req.body.password
                    })
                 //    use bcrypt to encrypt user's password
