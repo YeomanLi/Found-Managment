@@ -24,6 +24,11 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
+    },
+
+    identity: {
+        type: String,
+        required: true
     }
 })
 const User = mongoose.model('User', userSchema)
