@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const gravatar = require("gravatar");
 const jwt = require("jsonwebtoken");
 const keys = require("../config/keys");
-const controllers = {
+const userController = {
   /**
    * register feature
    * use gravatar to generate an avatar
@@ -87,4 +87,4 @@ const controllers = {
     })
   }
 };
-module.exports = controllers;
+module.exports = userController;

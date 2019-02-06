@@ -23,5 +23,7 @@ mongoose.connect(db)
         .then(() => console.log('MongoDB Connected'))
         .catch(err => console.log(err))
 
-const userAPI = require('./routes/api/user.js')
+const userAPI = require('./routes/api/user')
+const infoAPI = require('./routes/api/info')
 app.use('/api/user', userAPI)
+app.use('/api/info', infoAPI)
