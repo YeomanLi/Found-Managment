@@ -2,6 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import axios from 'axios'
+import { Form, FormItem, Input, Select, Option, Button, Row } from 'element-ui'
 
 Vue.config.productionTip = false
 import axios from 'axios'

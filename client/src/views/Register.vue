@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { Notification } from 'element-ui'
 export default {
   name: 'register',
 
@@ -88,6 +89,19 @@ export default {
               .post('/api/user/register', this.handleRegister)
               .then(res => {
                 console.log(res)
+              .post('/api/user/register', this.registerUser)
+              .then(res => {
+                console.log(res)
+                Notification({
+                  title: '注册成功',
+                  message: '现在为您跳转到登录页面',
+                  type: 'success',
+                  duration: 2500,
+                  showClose: false,
+                  onClose: () => {
+                    this.$router.push('/login')
+                  }
+                })
               })
         } else {
           console.log('not valid!')
