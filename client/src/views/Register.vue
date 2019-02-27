@@ -86,9 +86,6 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios
-              .post('/api/user/register', this.handleRegister)
-              .then(res => {
-                console.log(res)
               .post('/api/user/register', this.registerUser)
               .then(res => {
                 console.log(res)

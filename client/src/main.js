@@ -6,10 +6,6 @@ import axios from 'axios'
 import { Form, FormItem, Input, Select, Option, Button, Row } from 'element-ui'
 
 Vue.config.productionTip = false
-import axios from 'axios'
-import { Form, FormItem, Input, Select, Option, Button, Row } from 'element-ui'
-
-Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 Vue.component(Button.name, Button)
 Vue.component(Form.name, Form)

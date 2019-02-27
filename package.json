@@ -4,7 +4,7 @@
   "description": "restful api",
   "main": "index.js",
   "scripts": {
-    "client-install": "npm install --prefix client",
+    "client-install": "cnpm install --prefix client",
     "client": "npm start --prefix client",
     "start": "node index.js",
     "server": "nodemon index.js",
