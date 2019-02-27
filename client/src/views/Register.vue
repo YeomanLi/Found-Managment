@@ -89,6 +89,9 @@ export default {
               .post('/api/user/register', this.registerUser)
               .then(res => {
                 console.log(res)
+              .post('/api/user/register', this.registerUser)
+              .then(res => {
+                console.log(res)
                 Notification({
                   title: '注册成功',
                   message: '现在为您跳转到登录页面',
