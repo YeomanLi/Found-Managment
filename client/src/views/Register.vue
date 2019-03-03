@@ -39,13 +39,13 @@ export default {
   name: 'register',
 
   data () {
-      const checkPass = (rule, value, callback) => {
+    const checkPass = (rule, value, callback) => {
       if (value !== this.registerUser.password) {
         callback(new Error('两次输入密码不一致！'))
       } else {
         callback()
       }
-    };
+    }
     
     return {
       registerUser: {
