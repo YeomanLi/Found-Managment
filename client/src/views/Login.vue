@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { Notification } from 'element-ui'
 export default {
   name: 'login',
   data () {
@@ -45,8 +46,32 @@ export default {
   },
 
   methods: {
-    handleLogin (loginForm) {
-      console.log(this.loginUser)
+    handleLogin (formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          this.$axios
+              .post('/api/user/login', this.loginUser)
+              .then(res => {
+                console.log(res.data.token)
+                Notification({
+                  title: '登录成功',
+                  message: '现在为您跳转到首页',
+                  type: 'success',
+                  duration: 2500,
+                  showClose: false,
+                  onClick: () => { this.$router.push('/index') }
+                })
+              })
+        } else {
+          Notification({
+            title: '登录失败',
+            message: '请正确填写信息',
+            type: 'warning',
+            duration: 2500,
+            showClose: false
+          })
+        }
+      })
     }
   }
 }

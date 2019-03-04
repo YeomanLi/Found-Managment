@@ -95,13 +95,17 @@ export default {
                   type: 'success',
                   duration: 2500,
                   showClose: false,
-                  onClose: () => {
-                    this.$router.push('/login')
-                  }
+                  onClose: () => { this.$router.push('/login') }
                 })
               })
         } else {
-          console.log('not valid!')
+          Notification({
+            title: '注册失败',
+            message: '请正确填写信息',
+            type: 'warning',
+            duration: 2500,
+            showClose: false
+          })
         }
       })
     }
