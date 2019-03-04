@@ -30,16 +30,13 @@ module.exports = {
         } else {
             // 生产开发配置
         }
+        config.resolve.alias
+              .set('@', path.resolve(__dirname, '/'))
     },
     parallel: require('os').cpus().length > 1, // 构建时开启多进程处理babel编译
     pluginOptions: { // 第三方插件配置
     },
     pwa: { // 单页插件相关配置 https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa
-    },
-    resolve: {
-        alias: {
-            '@': path.resolve(__dirname, '/')
-        }
     },
     devServer: {
         open: true,
