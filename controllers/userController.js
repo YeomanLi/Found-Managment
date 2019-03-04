@@ -66,7 +66,7 @@ const userController = {
               { expiresIn: "1h" },
               (err, token) => {
                 if (err) throw err;
-                res.json({ success: true, token: 'Bearer ' + token });
+                res.status(200).json({ success: true, token: 'Bearer ' + token });
               }
             );
           }

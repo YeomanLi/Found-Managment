@@ -49,19 +49,8 @@ export default {
     handleLogin (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$axios
-              .post('/api/user/login', this.loginUser)
-              .then(res => {
-                console.log(res.data.token)
-                Notification({
-                  title: '登录成功',
-                  message: '现在为您跳转到首页',
-                  type: 'success',
-                  duration: 2500,
-                  showClose: false,
-                  onClick: () => { this.$router.push('/index') }
-                })
-              })
+          // to do
+          this.$store.dispatch('login', this.loginUser)
         } else {
           Notification({
             title: '登录失败',
