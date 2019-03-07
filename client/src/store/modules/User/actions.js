@@ -1,5 +1,5 @@
 import axios from 'axios' 
-import { API_BASE_USER } from '@/config'
+import { API_BASE_USER } from '../../../../config'
 
 import {
   REGISTER,
@@ -21,9 +21,18 @@ export const userActions = {
     commit(LOGIN)
     axios.post(`${ API_BASE_USER }/login`, loginUser)
          .then(res => {
-           console.log(res)
-           if (res.status == 200) { commit(LOGIN_SUCCESS, res.data) }
+           const { token } = res.data
+           if (res.status == 200) { commit(LOGIN_SUCCESS, token) }
            else { commit(LOGIN_FAILURE, res.data) }
+         })
+  },
+
+  register({commit}, registerUser) {
+    commit(REGISTER)
+    axios.post(`${ API_BASE_USER }/register`, registerUser)
+         .then(res => {
+           if (res.status == 200) { commit(REGISTER_SUCCESS, res) }
+           else { commit(REGISTER_FAILURE, res) }
          })
   }
 }

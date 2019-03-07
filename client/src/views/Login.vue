@@ -2,14 +2,14 @@
   <div class="login-page">
     <div class="form-container">
       <div class="login-page-title">
-        <span class="title">Yeoman在线后台管理系统</span>
+        <span class="title">Yeoman's System</span>
       </div>
       <el-form class="login-form" ref="loginForm" :rules="rules" :model="loginUser" label-width="90px" status-icon>
         <el-form-item label="邮箱" prop="email">
           <el-input placeholder="请输入邮箱" v-model="loginUser.email"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input placeholder="请输入密码" v-model="loginUser.password"></el-input>
+          <el-input type="password" placeholder="请输入密码" v-model="loginUser.password"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button class="loginBtn" type="primary" @click="handleLogin('loginForm')">登录</el-button>
@@ -22,6 +22,8 @@
 
 <script>
 import { Notification } from 'element-ui'
+import { LOGIN_SUCCESS, LOGIN_FAILURE, LOGIN_WARNING } from '../store/modules/User/mutation-types'
+import user from '../store/modules/User/user'
 export default {
   name: 'login',
   data () {
@@ -50,7 +52,7 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           // to do
-          this.$store.dispatch('login', this.loginUser)
+          this.$store.dispatch('user/login', this.loginUser)
         } else {
           Notification({
             title: '登录失败',
@@ -62,6 +64,44 @@ export default {
         }
       })
     }
+  },
+
+  // watch: {
+  //   'this.$store.user.loginStatus': function (newStatus, oldStatus) {
+  //     switch (newStatus) {
+  //       case LOGIN_SUCCESS:
+  //         console.log('view success')
+  //         break
+
+  //       case LOGIN_FAILURE:
+  //         console.log('view failure')
+  //         break
+
+  //       default:
+  //         console.log(newStatus)
+  //         break
+  //     }
+  //   }
+  // }
+
+  created () {
+    this.$store.subscribe(mutation => {
+      switch (mutation.type) {
+        case user + '/' + LOGIN_SUCCESS:
+          console.log('view success')
+          // to-do: 使用toastor通知用户登录成功
+          break
+        
+        case user + '/' +  LOGIN_FAILURE:
+          console.log('view failure')
+          // to-do: 使用toastor通知用户登录成功
+          break
+
+        case user + '/' +  LOGIN_WARNING:
+          console.log('view warning')
+          break
+      }
+    })
   }
 }
 </script>

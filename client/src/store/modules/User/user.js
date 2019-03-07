@@ -1,10 +1,11 @@
-const actions = require('./actions')
-const mutations = require('./mutations')
+import { userActions } from './actions'
+import { userMutations } from './mutations'
 export default {
-  namespace: true,
+  namespaced: true,
   state: {
-    token: ''
+    token: '',
+    loginStatus: ''
   },
-  actions,
-  mutations
+  actions: Object.assign({}, userActions),
+  mutations: Object.assign({}, userMutations)
 }
