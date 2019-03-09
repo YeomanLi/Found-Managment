@@ -23,7 +23,6 @@
 <script>
 import { Notification } from 'element-ui'
 import { LOGIN_SUCCESS, LOGIN_FAILURE, LOGIN_WARNING } from '../store/modules/User/mutation-types'
-import user from '../store/modules/User/user'
 export default {
   name: 'login',
   data () {
@@ -48,14 +47,37 @@ export default {
   },
 
   methods: {
+    handleStatus (status) {
+      if (200 == status) {
+        Notification({
+          title: '登录成功😃',
+          message: '正在为您跳转',
+          type: 'success',
+          duration: 2500,
+          showClose: false,
+          onClose: () => this.$router.push('/index')
+        })
+      } else if (400 == status) {
+          Notification({
+            title: '密码错误😢',
+            message: '请填写正确的密码',
+            type: 'error',
+            duration: 2500,
+            showClose: false
+          })
+      }
+    },
+
     handleLogin (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
           // to do
           this.$store.dispatch('user/login', this.loginUser)
+                     .then(successStatus => this.handleStatus(successStatus))
+                     .catch(errorStatus => this.handleStatus(errorStatus))
         } else {
           Notification({
-            title: '登录失败',
+            title: '信息尚未填写完整😳',
             message: '请正确填写信息',
             type: 'warning',
             duration: 2500,
@@ -64,44 +86,6 @@ export default {
         }
       })
     }
-  },
-
-  // watch: {
-  //   'this.$store.user.loginStatus': function (newStatus, oldStatus) {
-  //     switch (newStatus) {
-  //       case LOGIN_SUCCESS:
-  //         console.log('view success')
-  //         break
-
-  //       case LOGIN_FAILURE:
-  //         console.log('view failure')
-  //         break
-
-  //       default:
-  //         console.log(newStatus)
-  //         break
-  //     }
-  //   }
-  // }
-
-  created () {
-    this.$store.subscribe(mutation => {
-      switch (mutation.type) {
-        case user + '/' + LOGIN_SUCCESS:
-          console.log('view success')
-          // to-do: 使用toastor通知用户登录成功
-          break
-        
-        case user + '/' +  LOGIN_FAILURE:
-          console.log('view failure')
-          // to-do: 使用toastor通知用户登录成功
-          break
-
-        case user + '/' +  LOGIN_WARNING:
-          console.log('view warning')
-          break
-      }
-    })
   }
 }
 </script>

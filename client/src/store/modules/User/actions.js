@@ -19,20 +19,19 @@ import {
 export const userActions = {
   login({commit}, loginUser) {
     commit(LOGIN)
-    axios.post(`${ API_BASE_USER }/login`, loginUser)
-         .then(res => {
-           const { token } = res.data
-           if (res.status == 200) { commit(LOGIN_SUCCESS, token) }
-           else { commit(LOGIN_FAILURE, res.data) }
-         })
+    return new Promise((resolve, reject) => {
+      axios.post(`${ API_BASE_USER }/login`, loginUser)
+           .then(res => resolve(res.status))
+           .catch(err => reject(err.response.status))
+    })
   },
 
   register({commit}, registerUser) {
     commit(REGISTER)
-    axios.post(`${ API_BASE_USER }/register`, registerUser)
-         .then(res => {
-           if (res.status == 200) { commit(REGISTER_SUCCESS, res) }
-           else { commit(REGISTER_FAILURE, res) }
-         })
+    return new Promise((resolve, reject) => {
+      axios.post(`${ API_BASE_USER }/register`, registerUser)
+           .then(res => resolve(res.status))
+           .catch(err => reject(err.response.status))
+    })
   }
 }

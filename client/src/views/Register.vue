@@ -82,27 +82,37 @@ export default {
   },
   
   methods: {
+    handleStatus (status) {
+      if (200 == status) {
+        Notification({
+          title: '注册成功😃',
+          message: '正在为您跳转',
+          type: 'success',
+          duration: 2500,
+          showClose: false,
+          onClose: () => this.$router.push('/login')
+        })
+      } else if (400 == status) {
+        Notification({
+          title: '注册失败😢',
+          message: '邮箱已被注册',
+          type: 'error',
+          duration: 2500,
+          showClose: false
+        })
+      }
+    },
+
     handleRegister (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           // to do
           this.$store.dispatch('user/register', this.registerUser)
-          // this.$axios
-          //     .post('/api/user/register', this.registerUser)
-          //     .then(res => {
-          //       console.log(res)
-          //       Notification({
-          //         title: '注册成功',
-          //         message: '现在为您跳转到登录页面',
-          //         type: 'success',
-          //         duration: 2500,
-          //         showClose: false,
-          //         onClose: () => { this.$router.push('/login') }
-          //       })
-          //     })
+                     .then(successStaus => this.handleStatus(successStaus))
+                     .catch(errorStatus => this.handleStatus(errorStatus))
         } else {
           Notification({
-            title: '注册失败',
+            title: '信息填写不完整😳',
             message: '请正确填写信息',
             type: 'warning',
             duration: 2500,
