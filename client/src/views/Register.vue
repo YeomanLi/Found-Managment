@@ -17,16 +17,14 @@
         <el-form-item label="确认密码" prop="password2">
           <el-input v-model="registerUser.password2" type="password" autocomplete="off" placeholder="请再次输入密码"></el-input>
         </el-form-item>
-        <!-- todo
-        fix: 身份选择框未撑满整个容器宽度 -->
         <el-form-item label="身份">
-          <el-select v-model="registerUser.identity" placeholder="请选择你的身份">
+          <el-select class="full-width" v-model="registerUser.identity" placeholder="请选择你的身份">
             <el-option label="管理员" value="manager"></el-option>
             <el-option label="员工" value="emloyee"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="handleRegister('registerForm')">注册</el-button>
+          <el-button class="full-width" type="primary" @click="handleRegister('registerForm')">注册</el-button>
         </el-form-item>
       </el-form>
     </section>
@@ -127,13 +125,19 @@ export default {
 
 
 <style lang="scss" scoped>
+  $maximum: 100%;
+
+  .full-width {
+    width: $maximum;
+  }
+
   .register-page {
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: $maximum;
+    height: $maximum;
     // background-image: url(../assets/bg.jpg) no-repeat center center;
     background-image: url(../assets/bg.jpg);
-    background-size: 100% 100%;
+    background-size: $maximum $maximum;
   }
 
   .form-container {
