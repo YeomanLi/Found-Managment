@@ -6,8 +6,7 @@ import Register from './views/Register.vue'
 import Login from './views/Login.vue'
 
 Vue.use(Router)
-
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -19,7 +18,8 @@ export default new Router({
     {
       path: '/index',
       name: 'index',
-      component: Index
+      component: Index,
+      meta: { requiresAuth: true }
     },
 
     {
@@ -31,7 +31,7 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
     },
     
     {
@@ -41,3 +41,20 @@ export default new Router({
     },
   ]
 })
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    console.log(localStorage.userToken)
+    const isLogin = localStorage.userToken
+    if (isLogin) {
+      next()
+    } else {
+      next({
+        path: '/login',
+        // query: { redirect: to.fullPath }
+      })
+    }
+  } else {
+    next()
+  }
+})
+export default router
