@@ -1,5 +1,6 @@
 import axios from 'axios' 
 import { API_BASE_USER } from '../../../../config'
+import jwt_decode from 'jwt-decode'
 
 import {
   REGISTER,
@@ -21,7 +22,12 @@ export const userActions = {
     commit(LOGIN)
     return new Promise((resolve, reject) => {
       axios.post(`${ API_BASE_USER }/login`, loginUser)
-           .then(res => resolve(res.status))
+           .then(res => {
+             const { token } = res.data
+             localStorage.setItem('userToken', token)
+             const decodedJwt = jwt_decode(token)
+             resolve(res.status)
+           })
            .catch(err => reject(err.response.status))
     })
   },
