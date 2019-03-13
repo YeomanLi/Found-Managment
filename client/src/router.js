@@ -43,7 +43,6 @@ const router = new Router({
 })
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
-    console.log(localStorage.userToken)
     const isLogin = localStorage.userToken
     if (isLogin) {
       next()

@@ -1,4 +1,4 @@
-import axios from 'axios' 
+import axios from '../../../service'
 import { API_BASE_USER } from '../../../../config'
 import jwt_decode from 'jwt-decode'
 
