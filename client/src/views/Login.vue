@@ -65,6 +65,15 @@ export default {
             duration: 2500,
             showClose: false
           })
+      } else if (404 == status) {
+          Notification({
+            title: '该邮箱尚未注册😪',
+            message: '请前往注册',
+            type: 'error',
+            duration: 2500,
+            showClose: false,
+            onClose: () => this.$router.push('/register')
+          })
       }
     },
 

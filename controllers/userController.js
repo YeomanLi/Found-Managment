@@ -10,12 +10,12 @@ const userController = {
    * use gravatar to generate an avatar
    * use bcrypt to encrypt user's password
    */
-  register(req, res) {
-    User.findOne({ email: req.body.email })
-      .then(user => {
-        if (user) {
-          return res.status(400).json({ message: "email already registered" });
-        } else {
+  async register(req, res) {
+    try {
+      const user = await User.findOne({ email: req.body.email })
+      if (user) {
+        return res.status(400).json({ message: '此邮箱已被注册'})
+      } else {
           const avatar = gravatar.url(req.body.email, {
             s: "200",
             r: "pg",
@@ -27,7 +27,7 @@ const userController = {
             avatar,
             password: req.body.password,
             identity: req.body.identity
-          });
+          })
           bcrypt.genSalt(10, (err, salt) => {
             bcrypt.hash(newUser.password, salt, (err, hash) => {
               // if (err) throw err;
@@ -39,40 +39,42 @@ const userController = {
                 .catch(err => console.log(err));
             });
           });
-        }
-      })
-      .catch(err => console.log(err));
+      }
+    } catch (error) {
+      console.log(error)
+    }
   },
 
   /**
    * login feature
    * use jsonwebtoken to generate a token
    */
-  login(req, res) {
+  async login(req, res) {
     const email = req.body.email;
     const password = req.body.password;
-    User.findOne({ email }).then(user => {
+    try {
+      const user = await User.findOne({ email })
       if (!user) {
-        return res.status(404).json({ error: "user does not exist" });
+        return res.status(404).json({ error: 'user does not exitst' })
       } else {
-        bcrypt.compare(password, user.password).then(isMatch => {
-          if (!isMatch) {
-            return res.status(400).json({ error: "wrong password" });
-          } else {
-            const payload = { id: user.id, name: user.name };
-            jwt.sign(
-              payload,
-              keys.secretOrPrivateKey,
-              { expiresIn: "1h" },
-              (err, token) => {
-                if (err) throw err;
-                res.status(200).json({ success: true, token: 'Bearer ' + token });
-              }
-            );
-          }
-        });
+        const isMatch = await bcrypt.compare(password, user.password)
+        if (!isMatch) { return res.status(400).json({ error: 'wrong password'}) }
+        else {
+          const payload = { id: user.id, name: user.name}
+          jwt.sign(
+            payload,
+            keys.secretOrPrivateKey,
+            { expiresIn: '20000' },
+            (err, token) => {
+              if (err)  throw err
+              res.status(200).json({ success: true, token: 'Bearer ' + token })
+            }
+          )
+        }
       }
-    });
+    } catch (error) {
+      console.log(error)
+    }
   },
 
   /**

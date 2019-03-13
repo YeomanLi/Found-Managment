@@ -4,6 +4,7 @@ import Index from './views/Index.vue'
 import NotFound from './views/404.vue'
 import Register from './views/Register.vue'
 import Login from './views/Login.vue'
+import TestPage from './views/test.vue'
 
 Vue.use(Router)
 const router = new Router({
@@ -32,6 +33,13 @@ const router = new Router({
       path: '/login',
       name: 'login',
       component: Login,
+    },
+
+    {
+      path: '/test',
+      name: 'test',
+      component: TestPage,
+      meta: { requiresAuth: true }
     },
     
     {

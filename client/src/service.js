@@ -5,7 +5,7 @@ import { Loading, Message } from 'element-ui'
 let loading
 
 const options = {
-  text: '正在为您加载......',
+  text: 'Loading......',
   lock: true,
   background: 'rgba(0, 0, 0, 0.7)'
 }
