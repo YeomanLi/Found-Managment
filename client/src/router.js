@@ -49,6 +49,7 @@ const router = new Router({
     },
   ]
 })
+
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
     const isLogin = localStorage.userToken

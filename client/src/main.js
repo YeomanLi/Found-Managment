@@ -2,7 +2,13 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store/index'
-import { Form, FormItem, Input, Select, Option, Button, Row, Col } from 'element-ui'
+import {
+  Form, FormItem, 
+  Input, Select, 
+  Option, Button, 
+  Row, Col, 
+  Dropdown, DropdownMenu, DropdownItem
+ } from 'element-ui'
 
 Vue.config.productionTip = false
 // Vue.prototype.$axios = axios
@@ -14,6 +20,9 @@ Vue.component(FormItem.name, FormItem)
 Vue.component(Input.name, Input)
 Vue.component(Select.name, Select)
 Vue.component(Option.name, Option)
+Vue.component(Dropdown.name, Dropdown)
+Vue.component(DropdownMenu.name, DropdownMenu)
+Vue.component(DropdownItem.name, DropdownItem)
 // Vue.use(Button)
 
 new Vue({
