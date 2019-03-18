@@ -1,27 +1,30 @@
 <template>
-  <div>
-    <h1>{{ isAuthenticated }}</h1>
-    <h1>{{ user }}</h1>
-    <h1>fffsdf</h1>
-    <button @click="handleTest">click</button>
+  <div class="index">
+    <HeadNav></HeadNav>
   </div>
 </template>
 
 <script>
+import HeadNav from '../components/HeadNav.vue'
 import { mapGetters } from 'vuex'
 export default {
-  name: 'index',
+  name: 'indedx',
+  components: {
+    HeadNav
+  },
   computed: {
     ...mapGetters({
       isAuthenticated: 'user/getAuthenticated',
       user: 'user/getUser'
     })
   },
-
   methods: {
-    handleTest () {
-      console.log(this.$store)
-    }
+      handleTest () {
+        console.log(this.$store)
+      }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+</style>
