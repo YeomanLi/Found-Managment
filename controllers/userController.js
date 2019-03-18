@@ -60,7 +60,7 @@ const userController = {
         const isMatch = await bcrypt.compare(password, user.password)
         if (!isMatch) { return res.status(400).json({ error: 'wrong password'}) }
         else {
-          const payload = { id: user.id, name: user.name}
+          const payload = { id: user.id, name: user.name, identity: user.identity}
           jwt.sign(
             payload,
             keys.secretOrPrivateKey,

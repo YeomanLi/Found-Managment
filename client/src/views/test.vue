@@ -1,16 +1,19 @@
 <template>
   <div>
-    <h1>{{ msg }}</h1>
+    <h1>{{ isAuthenticated }}</h1>
+    <h1>{{ user }}</h1>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'test',
-  data () {
-    return {
-      msg: 'This is a test page for token'
-    }
+  computed: {
+    ...mapGetters({
+      isAuthenticated: 'user/getAuthenticated',
+      user: 'user/getUser'
+    })
   }
 }
 </script>

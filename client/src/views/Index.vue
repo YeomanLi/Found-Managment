@@ -1,8 +1,27 @@
 <template>
-  <div class="index">
+  <div>
+    <h1>{{ isAuthenticated }}</h1>
+    <h1>{{ user }}</h1>
+    <h1>fffsdf</h1>
+    <button @click="handleTest">click</button>
   </div>
 </template>
 
-<style lang="scss" scoped>
-</style>
+<script>
+import { mapGetters } from 'vuex'
+export default {
+  name: 'index',
+  computed: {
+    ...mapGetters({
+      isAuthenticated: 'user/getAuthenticated',
+      user: 'user/getUser'
+    })
+  },
 
+  methods: {
+    handleTest () {
+      console.log(this.$store)
+    }
+  }
+}
+</script>
