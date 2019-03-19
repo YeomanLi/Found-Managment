@@ -42,7 +42,7 @@ export default {
         case 'logout':
           this.logout()
           break
-        default:  console.log('default error')
+        default:  console.log('???')
       }
     },
 
@@ -51,8 +51,13 @@ export default {
       this.$router.push('/infoshow')
     },
 
-    logout () {
+    async logout () {
       console.log('logout')
+      const res = await this.$store.dispatch('user/logout')
+      console.log(res)
+      if ('success' == res) {
+        setTimeout(() => this.$router.push('/login'), 2000)
+      }
     }
   },
   computed: {

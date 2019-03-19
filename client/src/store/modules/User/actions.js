@@ -34,5 +34,14 @@ export const userActions = {
            .then(res => resolve(res.status))
            .catch(err => reject(err.response.status))
     })
+  },
+
+  logout({commit}) {
+    return new Promise((resolve, reject) => {
+      localStorage.removeItem('userToken')
+      commit(SET_AUTHENTICATED, false)
+      commit(SET_USER, null)
+      resolve('success')
+    })
   }
 }
