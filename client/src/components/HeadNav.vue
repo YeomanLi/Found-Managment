@@ -6,10 +6,10 @@
         <span class="title">资金流水管理系统</span>
       </el-col>
       <el-col :span="6" class="user-container">
-        <img class="user-avatar" src="../assets/logo.png" alt="avatar">
+        <img class="user-avatar" :src="user.avatar" alt="avatar">
         <div class="welcome-container">
           <p class="welcome-banner">欢迎</p>
-          <p class="user-name">Yeoman</p>
+          <p class="user-name">{{user.name}}</p>
         </div>
         <el-dropdown @command='setDialogInfo' trigger="click" class="drop-down">
           <span class="el-dropdown-link">
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import {mapGetters } from 'vuex'
 export default {
   name: 'HeadNav',
   methods: {
@@ -52,6 +53,11 @@ export default {
     logout () {
       console.log('logout')
     }
+  },
+  computed: {
+    ...mapGetters({
+      user: 'user/getUser'
+    })
   }
 }
 </script>
