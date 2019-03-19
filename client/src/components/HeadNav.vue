@@ -92,7 +92,7 @@ export default {
   }
 
   .user-container {
-    line-height: $header-height / 2;
+    line-height: $header-height;
     text-align: right;
     padding-right: 10px;
     .user-avatar {
@@ -107,8 +107,14 @@ export default {
   .welcome-container {
     display: inline-block;
     vertical-align: middle;
+    .welcome-banner,
+    .user-name {
+      text-align: center;
+      line-height: 20px;
+    }
     .welcome-banner {
-      text-align: left;
+      color: #fff;
+      font-weight: $f-weight - 200;
     }
     .user-name {
       color: $name-color;
