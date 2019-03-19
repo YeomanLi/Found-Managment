@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import {mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   name: 'HeadNav',
   methods: {
@@ -47,12 +47,10 @@ export default {
     },
 
     showInfoList () {
-      console.log('show info')
-      this.$router.push('/infoshow')
+      this.$router.push('/profile')
     },
 
     async logout () {
-      console.log('logout')
       const res = await this.$store.dispatch('user/logout')
       console.log(res)
       if ('success' == res) {

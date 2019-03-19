@@ -5,7 +5,7 @@ import NotFound from './views/404.vue'
 import Register from './views/Register.vue'
 import Login from './views/Login.vue'
 import Home from './views/Home.vue'
-import InfoShow from './views/InfoShow.vue'
+import Profile from './views/Profile.vue'
 import FoundList from './views/FoundList.vue'
 import TestPage from './views/test.vue'
 
@@ -26,7 +26,7 @@ const router = new Router({
       meta: { requiresAuth: true },
       children: [
         { path: '/home', name: 'home', component: Home },
-        { path: '/infoshow', name: 'infoshow', component: InfoShow },
+        { path: '/profile', name: 'profile', component: Profile },
         { path: '/foundlist', name: 'foundlist', component: FoundList }
       ]
     },
