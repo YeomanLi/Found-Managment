@@ -48,6 +48,7 @@ export default {
 
     showInfoList () {
       console.log('show info')
+      this.$router.push('/infoshow')
     },
 
     logout () {
