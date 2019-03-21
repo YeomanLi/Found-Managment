@@ -54,7 +54,7 @@ export default {
       const res = await this.$store.dispatch('user/logout')
       console.log(res)
       if ('success' == res) {
-        setTimeout(() => this.$router.push('/login'), 2000)
+        setTimeout(() => this.$router.push('/login'), 1000)
       }
     }
   },

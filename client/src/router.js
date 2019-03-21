@@ -25,6 +25,7 @@ const router = new Router({
       component: Index,
       meta: { requiresAuth: true },
       children: [
+        // { path: '', component: Home },
         { path: '/home', name: 'home', component: Home },
         { path: '/profile', name: 'profile', component: Profile },
         { path: '/foundlist', name: 'foundlist', component: FoundList }

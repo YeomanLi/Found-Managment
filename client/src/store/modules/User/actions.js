@@ -3,12 +3,9 @@ import { API_BASE_USER, isEmpty } from '../../../../config'
 import jwt_decode from 'jwt-decode'
 
 import {
-  // GET_USER_INFO,
-  // GET_USER_INFO_SUCCESS,
-  // GET_USER_INFO_FAILURE,
-
   SET_AUTHENTICATED,
-  SET_USER
+  SET_USER,
+  LOG_OUT
 } from './mutation-types'
 
 export const userActions = {
@@ -24,7 +21,6 @@ export const userActions = {
              resolve(res.status)
            })
            .catch(err => reject(err.response.status))
-          // .catch(err => console.log(err))
     })
   },
 
@@ -38,9 +34,7 @@ export const userActions = {
 
   logout({commit}) {
     return new Promise((resolve, reject) => {
-      localStorage.removeItem('userToken')
-      commit(SET_AUTHENTICATED, false)
-      commit(SET_USER, null)
+      commit(LOG_OUT)
       resolve('success')
     })
   }

@@ -1,12 +1,14 @@
 <template>
-  <div class="profile-box">
-    <div class="card-outline">
-      <div class="img-container">
-        <img class="user-avatar" :src="user.avatar" alt="avatar">
-      </div>
-      <div class="user-info">
-        <p class="user-name">{{ user.name }}</p>
-        <p class="user-identity">{{ user.identity }}</p>
+  <div class="profile-container">
+    <div class="profile-box">
+      <div class="card-outline">
+        <div class="img-container">
+          <img class="user-avatar" :src="user.avatar" alt="avatar">
+        </div>
+        <div class="user-info">
+          <p class="user-name">{{ user.name }}</p>
+          <p class="user-identity">{{ user.identity == 'manager' ? '经理' : '职员' }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -30,6 +32,13 @@ export default {
   $img-container-width: 100px;
   $img-container-height: 100px;
   $avatar-size: 80px;
+
+  .profile-container {
+    width: 100%;
+    height: 100%;
+    background: url('../assets/profile-bg.jpg') no-repeat;
+    background-size: 100% 100%;
+  }
 
   .profile-box {
     position: absolute;
