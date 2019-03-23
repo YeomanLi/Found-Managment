@@ -1,23 +1,31 @@
 <template>
-  <div>{{infoList}}</div>
+  <div>
+    {{infoList}}
+    <button @click="handleTest">click</button>
+  </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'FoundList',
-  data () {
-    return {
-      infoList: {}
-    }
+  // created () {
+  //   if (0 == infoList.length) {
+  //     this.$store.dispatch('info/getAllInfo')
+  //   }
+  // },
+
+  computed: {
+    ...mapGetters({
+      infoList: 'info/getAllInfo'
+    })
   },
 
-  created () {
-    this.$store.dispatch('info/getAllInfo')
-               .then(res => {
-                 console.log(res)
-                 this.infoList = res
-               })
-               .catch(err => console.log(err))
+  methods: {
+    handleTest () {
+      alert('test')
+      this.$store.dispatch('info/getAllInfo')
+    }
   }
 }
 </script>

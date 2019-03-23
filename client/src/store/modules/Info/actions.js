@@ -1,16 +1,20 @@
 import { API_BASE_INFO } from '../../../../config'
 import axios from '../../../service'
 
+import {
+  SET_INFO_LIST
+} from './mutation-types'
+
 const infoActions = {
-  getAllInfo (state) {
+  getAllInfo ({commit}) {
     return new Promise((resolve, reject) => {
       axios.post(`${ API_BASE_INFO }/`)
            .then(res => {
-             console.log('resolve!')
-             resolve(res)
+             console.log(res.data)
+             commit(SET_INFO_LIST, res.data)
+             resolve(res.data)
            })
            .catch(err => {
-             console.log('reject!')
              reject(err)
            })
     })
