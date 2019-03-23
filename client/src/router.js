@@ -7,7 +7,6 @@ import Login from './views/Login.vue'
 import Home from './views/Home.vue'
 import Profile from './views/Profile.vue'
 import FoundList from './views/FoundList.vue'
-import TestPage from './views/test.vue'
 
 Vue.use(Router)
 const router = new Router({
@@ -25,10 +24,9 @@ const router = new Router({
       component: Index,
       meta: { requiresAuth: true },
       children: [
-        // { path: '', component: Home },
-        { path: '/home', name: 'home', component: Home },
-        { path: '/profile', name: 'profile', component: Profile },
-        { path: '/foundlist', name: 'foundlist', component: FoundList }
+        { path: '', component: Home, meta: { requiresAuth: true } },
+        { path: 'profile', name: 'profile', component: Profile },
+        { path: 'foundlist', name: 'foundlist', component: FoundList }
       ]
     },
 
@@ -43,13 +41,6 @@ const router = new Router({
       name: 'login',
       component: Login,
     },
-
-    {
-      path: '/test',
-      name: 'test',
-      component: TestPage,
-      meta: { requiresAuth: true }
-    },
     
     {
       path: '*',
@@ -63,14 +54,18 @@ router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
     const isLogin = localStorage.userToken
     if (isLogin) {
+      console.log('next')
       next()
     } else {
+      console.log('push')
       next({
         path: '/login',
         // query: { redirect: to.fullPath }
       })
     }
   } else {
+    console.log('not')
+    console.log(to.fullPath)
     next()
   }
 })

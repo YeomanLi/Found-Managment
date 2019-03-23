@@ -7,7 +7,7 @@
         text-color="#fff"
         active-text-color="#409eff"
         class="el-menu-vertical">
-        <router-link to="/home">
+        <router-link to="/">
           <el-menu-item index="0">
             <fai class="fa-icon" icon="server" />
             <span slot="title">首页</span>
@@ -43,13 +43,13 @@ export default {
           icon: 'money-bill-alt',
           name: '资金管理',
           path: 'fund',
-          children: [{ path: "foundlist", name: "资金流水" }]
+          children: [{ path: "/index/foundlist", name: "资金流水" }]
         },
         {
           icon: 'sitemap',
           name: '信息管理',
           path: 'info',
-          children: [{ path: "profile", name: "个人信息" }]
+          children: [{ path: "/index/profile", name: "个人信息" }]
         }
       ]
     }

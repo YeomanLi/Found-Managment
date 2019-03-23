@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store/index'
+import axios from './service'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faServer, faMoneyBillAlt, faSitemap } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome' 
@@ -11,12 +12,13 @@ import {
   Option, Button, 
   Row, Col, 
   Dropdown, DropdownMenu, DropdownItem,
-  Menu, Submenu, MenuItem
+  Menu, Submenu, MenuItem,
+  Table, TableColumn
  } from 'element-ui'
 library.add(faServer, faMoneyBillAlt, faSitemap)
 
 Vue.config.productionTip = false
-// Vue.prototype.$axios = axios
+Vue.prototype.$axios = axios
 // Vue.use(Button)
 Vue.component(Button.name, Button)
 Vue.component(Form.name, Form)
@@ -32,6 +34,8 @@ Vue.component(DropdownItem.name, DropdownItem)
 Vue.component(Menu.name, Menu)
 Vue.component(Submenu.name, Submenu)
 Vue.component(MenuItem.name, MenuItem)
+Vue.component(Table.name, Table)
+Vue.component(TableColumn.name, TableColumn)
 Vue.component('fai', FontAwesomeIcon)
 
 new Vue({
