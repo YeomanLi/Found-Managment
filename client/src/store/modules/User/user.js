@@ -10,7 +10,7 @@ export default {
     // thisUser: localStorage.getItem('user')
     thisUser: JSON.parse(localStorage.getItem('user'))
   },
-  actions: Object.assign({}, userActions),
-  mutations: Object.assign({}, userMutations),
-  getters: Object.assign({}, userGetters)
+  actions: userActions,
+  mutations: userMutations,
+  getters: userGetters
 }

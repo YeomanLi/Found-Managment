@@ -1,0 +1,2 @@
+const SET_INFO_LIST = 'SET_INFO_LIST'
+export { SET_INFO_LIST }

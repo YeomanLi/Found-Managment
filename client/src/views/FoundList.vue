@@ -1,23 +1,23 @@
 <template>
-  <div>{{infoList}}</div>
+  <div>
+    {{infoList}}
+  </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'FoundList',
-  data () {
-    return {
-      infoList: {}
+  created () {
+    if (0 == this.infoList.length) {
+      this.$store.dispatch('info/getAllInfo')
     }
   },
 
-  created () {
-    this.$store.dispatch('info/getAllInfo')
-               .then(res => {
-                 console.log(res)
-                 this.infoList = res
-               })
-               .catch(err => console.log(err))
+  computed: {
+    ...mapGetters({
+      infoList: 'info/getAllInfo'
+    })
   }
 }
 </script>
