@@ -175,7 +175,6 @@ export default {
     },
 
     handleAdd () {
-      console.log('add')
       this.dialog = {
         show: true,
         title: '添加',
@@ -192,14 +191,31 @@ export default {
       }
     },
 
-    handleUpdate (payload, type) {
-      if ('add' == type) {
-        this.currentInfo.push(payload)
+    handleEdit (payload) {
+      this.dialog = {
+        show: true,
+        title: '编辑',
+        option: 'edit'
+      }
+      this.form = {
+        type: payload.type,
+        description: payload.description,
+        income: payload.income,
+        expend: payload.expend,
+        cash: payload.cash,
+        remark: payload.remark,
+        id: payload._id
       }
     },
 
-    handleEdit () {
-      console.log('edit')
+    handleUpdate (payload, type) {
+      if ('add' == type) {
+        this.currentInfo.push(payload)
+      } else {
+        const thisIndex = this.currentInfo.findIndex((val) => payload._id == val._id)
+        if (-1 < thisIndex) this.currentInfo.splice(thisIndex, 1, payload)
+        else  console.log('???')
+      }
     },
 
     async handleDelete (rowData, index) {

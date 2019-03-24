@@ -43,8 +43,9 @@ const infoActions = {
   },
 
   editInfo({commit} , payload) {
+    console.log(payload.id)
     return new Promise((resolve, reject) => {
-      axios.post(`${ API_BASE_INFO }/edit/${ payload._id }`, payload)
+      axios.post(`${ API_BASE_INFO }/edit/${ payload.id }`, payload)
            .then(res => resolve(res))
            .catch(err => reject(err))
     })

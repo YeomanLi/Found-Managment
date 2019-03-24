@@ -92,7 +92,8 @@ export default {
           const actionsType = 'add' == this.dialog.option ? 'addInfo' : 'editInfo'
           this.$store.dispatch(`info/${ actionsType }`, this.form)
                      .then(res => {
-                       this.$emit('update', res.data, 'add')
+                       console.log(res)
+                       this.$emit('update', res.data, this.dialog.option)
                        this.dialog.show = false
                      })
                      .catch(err => console.log(err))
