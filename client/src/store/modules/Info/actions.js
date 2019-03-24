@@ -32,6 +32,22 @@ const infoActions = {
              reject(err)
            })
     })
+  },
+
+  addInfo({commit}, payload) {
+    return new Promise((resolve, reject) => {
+      axios.post(`${ API_BASE_INFO }/add`, payload)
+           .then(res => resolve(res))
+           .catch(err => reject(err))
+    })
+  },
+
+  editInfo({commit} , payload) {
+    return new Promise((resolve, reject) => {
+      axios.post(`${ API_BASE_INFO }/edit/${ payload._id }`, payload)
+           .then(res => resolve(res))
+           .catch(err => reject(err))
+    })
   }
 }
 

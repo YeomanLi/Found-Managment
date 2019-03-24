@@ -121,13 +121,18 @@
         </el-table-column>
       </el-table>
     </div>
+    <FormDialog :dialog="dialog" :form="form" @update="handleUpdate"></FormDialog>
   </div>
 </template>
 
 <script>
 import { Notification } from 'element-ui'
+import FormDialog from '../components/FormDialog'
 export default {
   name: 'FoundList',
+  components: {
+    FormDialog
+  },
   data () {
     return {
       currentInfo: [],
@@ -136,6 +141,20 @@ export default {
       filterTime: {
         startTime: '',
         endTime: ''
+      },
+      form: {
+        type: '',
+        description: '',
+        income: '',
+        expend: '',
+        cash: '',
+        remark: '',
+        id: ''
+      },
+      dialog: {
+        title: '',
+        show: false,
+        option: '',
       }
     }
   },
@@ -157,6 +176,26 @@ export default {
 
     handleAdd () {
       console.log('add')
+      this.dialog = {
+        show: true,
+        title: '添加',
+        option: 'add'
+      }
+      this.form = {
+        type: '',
+        description: '',
+        income: '',
+        expend: '',
+        cash: '',
+        remark: '',
+        id: ''
+      }
+    },
+
+    handleUpdate (payload, type) {
+      if ('add' == type) {
+        this.currentInfo.push(payload)
+      }
     },
 
     handleEdit () {

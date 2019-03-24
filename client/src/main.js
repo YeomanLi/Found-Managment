@@ -15,7 +15,8 @@ import {
   Dropdown, DropdownMenu, DropdownItem,
   Menu, Submenu, MenuItem,
   Table, TableColumn,
-  DatePicker
+  DatePicker,
+  Dialog
  } from 'element-ui'
 library.add(faServer, faMoneyBillAlt, faSitemap)
 
@@ -40,6 +41,7 @@ Vue.component(Table.name, Table)
 Vue.component(TableColumn.name, TableColumn)
 Vue.component(DatePicker.name, DatePicker)
 Vue.component(Icon.name, Icon)
+Vue.component(Dialog.name, Dialog)
 Vue.component('fai', FontAwesomeIcon)
 
 new Vue({

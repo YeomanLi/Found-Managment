@@ -54,18 +54,14 @@ router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
     const isLogin = localStorage.userToken
     if (isLogin) {
-      console.log('next')
       next()
     } else {
-      console.log('push')
       next({
         path: '/login',
         // query: { redirect: to.fullPath }
       })
     }
   } else {
-    console.log('not')
-    console.log(to.fullPath)
     next()
   }
 })
