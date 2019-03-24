@@ -21,6 +21,8 @@ const infoController = {
    * delete fund info feature
    */
   deleteInfo(req, res) {
+    // Info.findOneAndDelete({ _id: req.params.id })
+    // console.log(req.params.id)
     Info.findOneAndDelete({ _id: req.params.id })
         .then(info => res.json({msg: 'ok', info}))
         .catch(error => res.status(404).json({error, msg: 'delete failed'}))

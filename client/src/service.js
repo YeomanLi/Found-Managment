@@ -29,6 +29,7 @@ axios.interceptors.response.use(response => {
   endLoading()
   return response
 }, error => {
+  endLoading()
   Message.error(error.response.data)
   const { status } = error.response
   if (401 == status) {

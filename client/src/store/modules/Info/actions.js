@@ -18,6 +18,20 @@ const infoActions = {
              reject(err)
            })
     })
+  },
+
+  deleteInfo({commit}, payload) {
+    return new Promise((resolve, reject) => {
+      axios.delete(`${ API_BASE_INFO }/delete/${ payload }`)
+           .then(res => {
+             console.log(res)
+             resolve('success')
+           })
+           .catch(err => {
+             console.log(err)
+             reject(err)
+           })
+    })
   }
 }
 

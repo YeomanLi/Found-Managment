@@ -7,13 +7,15 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faServer, faMoneyBillAlt, faSitemap } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome' 
 import {
+  Icon,
   Form, FormItem, 
   Input, Select, 
   Option, Button, 
   Row, Col, 
   Dropdown, DropdownMenu, DropdownItem,
   Menu, Submenu, MenuItem,
-  Table, TableColumn
+  Table, TableColumn,
+  DatePicker
  } from 'element-ui'
 library.add(faServer, faMoneyBillAlt, faSitemap)
 
@@ -36,6 +38,8 @@ Vue.component(Submenu.name, Submenu)
 Vue.component(MenuItem.name, MenuItem)
 Vue.component(Table.name, Table)
 Vue.component(TableColumn.name, TableColumn)
+Vue.component(DatePicker.name, DatePicker)
+Vue.component(Icon.name, Icon)
 Vue.component('fai', FontAwesomeIcon)
 
 new Vue({
