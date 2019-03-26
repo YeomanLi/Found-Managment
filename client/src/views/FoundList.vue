@@ -10,6 +10,7 @@
           v-model="filterTime.startTime"
           type="datetime"
           placeholder="选择起始时间点"
+          value-format="timestamp"
         >
         </el-date-picker>
         <span>--</span>
@@ -17,6 +18,7 @@
           v-model="filterTime.endTime"
           type="datetime"
           placeholder="选择结束时间点"
+          value-format="timestamp"
         >
         </el-date-picker>
       </el-form-item>
@@ -27,7 +29,6 @@
         <el-button type="primary" size="small" icon="search" @click="handleAdd">添加</el-button>
       </el-form-item>
     </el-form>
-    <!-- {{thisInfo}} -->
     <div class="table-container">
       <el-table
         v-if="currentInfo.length > 0"
@@ -213,7 +214,6 @@ export default {
       })
     },
 
-
     handleCurrentChange (page) {
       const previosNum = this.paginations.page_size * (page - 1)
       const leftInfo = this.allInfo.filter((item, index) => {
@@ -234,7 +234,22 @@ export default {
     },
 
     handleFilter () {
-      console.log(this.filterTime)
+      if (!this.filterTime.startTime || !this.filterTime.endTime) {
+        Notification({
+          title: 'Warning',
+          message: '请完整填写筛选条件',
+          type: 'warning',
+          duration: 1000,
+          showClose: false
+        })
+      } else {
+        this.allInfo = this.allInfo.filter((item) => {
+          const date = new Date(item.date)
+          const tempDate = date.getTime()
+          return tempDate >= this.filterTime.startTime && tempDate <= this.filterTime.endTime
+        })
+        this.setPaginations()
+      }
     },
 
     handleAdd () {
