@@ -120,6 +120,20 @@
           </template>
         </el-table-column>
       </el-table>
+      <el-row>
+        <el-col :span="24" class="pagination-contaienr">
+          <el-pagination
+            v-if="paginations.total > 0"
+            :page-sizes="paginations.page_sizes"
+            :page-size="paginations.page_size"
+            :layout="paginations.layout"
+            :toal="paginations.total"
+            :current-page.sync="paginations.page_index"
+            @current-change="handleCurrentChange"
+            @size-change="handleSizeChange">
+          </el-pagination>
+        </el-col>
+      </el-row>
     </div>
     <FormDialog :dialog="dialog" :form="form" @update="handleUpdate"></FormDialog>
   </div>
@@ -136,7 +150,7 @@ export default {
   data () {
     return {
       currentInfo: [],
-      allTableInfo: [],
+      allInfo: [],
       filterTableInfo: [],
       filterTime: {
         startTime: '',
@@ -155,6 +169,13 @@ export default {
         title: '',
         show: false,
         option: '',
+      },
+      paginations: {
+        page_index: 1,
+        total: 0,
+        page_size: 5,
+        page_sizes: [5, 10, 15, 20],
+        layout: "total, sizes, prev, pager, next, jumper"
       }
     }
   },
@@ -167,7 +188,49 @@ export default {
       console.log('fentch...')
       const resArr = await this.$store.dispatch('info/getAllInfo')
       this.currentInfo = resArr
-      this.allTableInfo = resArr
+      this.allInfo = resArr
+      this.setPaginations()
+    },
+
+    handleArrInfo (payload, type) {
+      const currentInfoId = this.currentInfo.findIndex((val) => payload._id == val._id)
+      const allInfoId = this.allInfo.findIndex((val) => payload._id == val._id)
+      console.log(type)
+      if ('delete' == type) {
+        this.currentInfo.splice(currentInfoId, 1)
+        this.allInfo.splice(allInfoId, 1) 
+      } else {
+        this.currentInfo.splice(currentInfoId, 1, payload)
+        this.allInfo.splice(allInfoId, 1, payload) 
+      }
+    },
+
+    handleSizeChange (page_size) {
+      this.paginations.page_size = page_size
+      this.paginations.page_index = 1
+      this.currentInfo = this.allInfo.filter((item, index) => {
+        return index < page_size
+      })
+    },
+
+
+    handleCurrentChange (page) {
+      const previosNum = this.paginations.page_size * (page - 1)
+      const leftInfo = this.allInfo.filter((item, index) => {
+        return index >= previosNum
+      })
+      this.currentInfo = leftInfo.filter((item, index) => {
+        return index < this.paginations.page_size
+      })
+    },
+
+    setPaginations () {
+      this.paginations.total = this.allInfo.length
+      this.paginations.page_size = 5
+      this.paginations.page_index = 1
+      this.currentInfo = this.allInfo.filter((item, index) => {
+        return index < this.paginations.page_size
+      })
     },
 
     handleFilter () {
@@ -211,10 +274,9 @@ export default {
     handleUpdate (payload, type) {
       if ('add' == type) {
         this.currentInfo.push(payload)
+        this.allInfo.push(payload)
       } else {
-        const thisIndex = this.currentInfo.findIndex((val) => payload._id == val._id)
-        if (-1 < thisIndex) this.currentInfo.splice(thisIndex, 1, payload)
-        else  console.log('???')
+        this.handleArrInfo(payload, type)
       }
     },
 
@@ -228,9 +290,7 @@ export default {
           duration: 1000,
           showClose: false
         })
-        const thisIndex = this.currentInfo.findIndex((val) => rowData._id == val._id)
-        if (-1 < thisIndex) this.currentInfo.splice(thisIndex, 1)
-        else  console.log('???')
+        this.handleArrInfo(rowData, 'delete')
       } else {
         console.log(res)
         Notification({
