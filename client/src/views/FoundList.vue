@@ -26,7 +26,7 @@
         <el-button type="primary" size="small" icon="search" @click="handleFilter">筛选</el-button>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" size="small" icon="search" @click="handleAdd">添加</el-button>
+        <el-button type="primary" size="small" icon="search" @click="handleAdd" :disabled="user.identity != 'manager'">添加</el-button>
       </el-form-item>
     </el-form>
     <div class="table-container">
@@ -110,12 +110,14 @@
                   type="warning" 
                   icon='edit' 
                   size="small"
+                  :disabled="user.identity != 'manager'"
                   @click='handleEdit(scope.row)'
               >编辑</el-button>
               <el-button 
                   type="danger" 
                   icon='delete' 
                   size="small"
+                  :disabled="user.identity != 'manager'"
                   @click='handleDelete(scope.row)'
               >删除</el-button>
           </template>
@@ -143,6 +145,7 @@
 <script>
 import { Notification } from 'element-ui'
 import FormDialog from '../components/FormDialog'
+import { mapGetters } from 'vuex'
 export default {
   name: 'FoundList',
   components: {
@@ -179,6 +182,11 @@ export default {
         layout: "total, sizes, prev, pager, next, jumper"
       }
     }
+  },
+  computed: {
+    ...mapGetters({
+      user: 'user/getUser'
+    })
   },
   created () {
     this.fentchInfo()
